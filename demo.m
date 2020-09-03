@@ -19,9 +19,10 @@ nb_epochs = 20;%needs to specify
 
 classes = unique(trainLab);
 testSetLab = zeros(size(testP,1)+1,size(testP,2)+1,size(testP,3));
+testSetLab(1:end-1,1:end-1,:) = testP;
 testSetLab(end,end,:) = testLab;
 
-[model GLVQ_LogEu_settting, costs2,trainerr2 ] = RiemanGLVQ_train(trainP, ...
+[model RGLVQ_settting, costs, trainerr,testerr] = RiemanGLVQ_train(trainP, ...
     trainLab,'PrototypesPerClass',nPrototype,...
     'squashFunction','sigmoid','nb_epochs',nb_epochs, 'testSet',testSetLab);
 
